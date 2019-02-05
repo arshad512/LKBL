@@ -38,7 +38,6 @@ static char *mempool;
 DEFINE_SPINLOCK(bdlock);
 
 /*
- *
  * =======================
  * Block device operation.
  * =======================
@@ -149,17 +148,14 @@ static void foo(struct request_queue *q)
 	int r_count=0;
 	int w_count=0;
 
-	while (1) {
-		/*
-		 * blk_fetch_request():
-		 * Retrieve the 'FIRST' request from queue
-		 * and starts it. 
-		 * REMEMBER!!! - It starts queue processing
-		 */
-		req = blk_fetch_request(q);
-		if (!req)
-			break;
-
+	/*
+	 * blk_fetch_request():
+	 * Retrieve the 'FIRST' request from queue
+	 * and starts it. 
+	 * REMEMBER!!! - It starts queue processing
+	 */
+	req = blk_fetch_request(q); 
+	while (req) {
 		/* 
 		 * A block device can get calls which do 
 		 * not involve transfer of data. Like low level
@@ -172,8 +168,18 @@ static void foo(struct request_queue *q)
 		 * 	continue;
 		 */
 		if (blk_rq_is_passthrough(req)) {
-			printk(KERN_INFO "Check if it is a pass through...\n");
-			continue;
+			printk(KERN_INFO "Not FS Request...Ignore\n");
+			/*
+			 * End current request.
+			 */
+			if(!__blk_end_request_cur(req,0)) {
+				/*
+				 * Current request successfully ended.
+				 * Continue with reading next request 
+				 * from queue
+				 */
+				req = blk_fetch_request(q);
+			}
 		}
 		
 		rq_for_each_segment(bvec, req, iter) {
@@ -206,9 +212,13 @@ static void foo(struct request_queue *q)
 		 * taken and blk_end_request() if lock is already taken.
 		 * then call __blk_end_request_cur()
 		 */
-		if(!__blk_end_request_cur(req,0)) {
-			// Yes there is still data left.
-			continue;
+		if(!__blk_end_request_cur(req, 0)) {
+			/*
+			 * Current request successfully ended.
+			 * Continue with reading next request 
+			 * from queue
+			 */
+			req = blk_fetch_request(q);
 		}
 	}
 	printk(KERN_INFO "Total read is %d\n", r_count);
