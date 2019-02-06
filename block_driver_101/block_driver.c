@@ -27,6 +27,7 @@
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Basic Block driver");
+MODULE_AUTHOR("Arshad Hussain <arshad.super@gmail.com>");
 
 #define SIZE_IN_KBYTES 256
 
