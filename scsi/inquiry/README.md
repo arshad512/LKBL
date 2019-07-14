@@ -8,19 +8,20 @@ with slight modifications.
 
 
 With sginfo (sg3_utils) the output is like below.
-
-# sginfo /dev/sda2
+```
+$ sginfo /dev/sda2
 INQUIRY response (cmd: 0x12)
 ---------------------------------------
 Device Type                0
 Vendor:                    ATA
 Product:                   VBOX HARDDISK
 Revision level:            1.0
-
+```
 
 With code, the output is similar, only the display format is different.
-
-# gcc -Wall -o sginfo scsi_inquiry.c
+```
+$ gcc -Wall -o sginfo scsi_inquiry.c
 [root@localhost inquiry]# ./sginfo
     ATA       VBOX HARDDISK     1.0 , byte_7=0x2
 #
+```
