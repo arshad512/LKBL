@@ -1,4 +1,4 @@
-This section demonstrate how to invode a SCSI command using sg utils and 
+This section demonstrate how to invoke a SCSI command using sg utils and 
 programitically. The SCSI command used in this example is INQUIRY (0x12).
 
 INQUIRY is one of the mandatory command set under SCSI-3 and must be 
