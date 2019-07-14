@@ -1,25 +1,25 @@
 # SCSI (TODO)
 
-Initiator
-Target
-Task
-Nexus
-LUN
+1. Initiator
+1. Target
+1. Task
+1. Nexus
+1. LUN
 
-SCSI Command:
-CDB
+1. SCSI Command:
+1. CDB
 
-Status
+1. Status
 
-Sense Data
+1. Sense Data
 
-Unit attention 
-SCSI Primary Commands (SPC)
-SCSI Block Devices
-Mapping
+1. Unit attention 
+1. SCSI Primary Commands (SPC)
+1. SCSI Block Devices
+1. Mapping
 
-Storage Array controllers
-SAC Commands
-Mapping
+1. Storage Array controllers
+1. SAC Commands
+1. Mapping
 
-Fibre Channel
+1. Fibre Channel
