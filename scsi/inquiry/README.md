@@ -23,5 +23,5 @@ With code (scsi_inquiry.c), the output is similar, only the display format is di
 $ gcc -Wall -o sginfo scsi_inquiry.c
 [root@localhost inquiry]# ./sginfo
     ATA       VBOX HARDDISK     1.0 , byte_7=0x2
-#
+$
 ```
