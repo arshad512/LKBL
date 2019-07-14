@@ -1,3 +1,16 @@
+# Background
+
+Bus connects and help transfer information between two components within a computer. A bus internally is made up of data, memory and control lines or paths. Data path transfers Mbytes between components. This is further qualified by memory/address path. The control lines determin the direction of the transfer.
+
+Bus which connects between CPU and IO device are called IO Bus. Example, SCSI.
+
+SCSI is detailed under :-
+1. SAM = SSCI-3 Architecture Model (Fundamantal SCSI Architecture)
+2. SPC = SCSI primary commands, defines the commands and their behaviour
+3. SBC = SCSI Block commands (for disk)
+
+
+
 This section demonstrate how to invoke a SCSI command using sg utils and 
 programitically. The SCSI command used in this example is INQUIRY (0x12).
 
