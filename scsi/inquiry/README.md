@@ -18,7 +18,7 @@ Product:                   VBOX HARDDISK
 Revision level:            1.0
 ```
 
-With code, the output is similar, only the display format is different.
+With code (scsi_inquiry.c), the output is similar, only the display format is different.
 ```
 $ gcc -Wall -o sginfo scsi_inquiry.c
 [root@localhost inquiry]# ./sginfo
