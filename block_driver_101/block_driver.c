@@ -97,7 +97,9 @@ static void foo(struct request_queue *q)
 	 *
 	 * Request are sorted into an order in request queue for
 	 * performance benefits. Drivers can still re-order the
-	 * request in case of 'tagged command queueing' (TCQ) and 
+	 * request in case of 'tagged command queueing' (TCQ - Technology 
+	 * which is part of all modern SCSI device allows device to
+	 * reorder request instead of purly relying on IO scheduler) and 
 	 * write cacheing, to complete in order. To stop the reordering
 	 * eg: Journal FS which force journal entries to disk before
 	 * the operations they describe.
