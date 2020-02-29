@@ -1,5 +1,12 @@
 # SCSI/iSCSI (TODO)
 
+##### SCSI is a data access protocol for block devices.
+##### iSCSI works on top of TCP. It header is 48 bytes (defining opcode to execute, LUN to connect etc) with variable byte iSCSI DATA. This allows SCSI command to be send over LAN or WAN. It does it by encapsulating SCSI command within its header and seamlessly sending over TCP. The connection is between iSCSI initiator and iSCSI server (also knows as target). When iSCSI packets arrives at the server, the iSCSI layer strips out the header and passes SCSI command to the block layer. For the server this is agnostic and it does not know if SCSI command is over network or local. 
+##### iSCSI, protocol connection can be divided into 2 broad phases. First is login phase and second is Full Feature Phase or FFP.
+##### Login phase, is mostly authenticate (CHAP etc) and if successful transfere to second phase. For this iSCSI inititor sends and PDU with opcode of LOGIN. Initiator also maintains a counter called CMDSN to detect any out of order dilivery to target.
+##### Full feature phase is were DATA can be send and recieved from target. Target maintains a counter called STATSN to detect any out of order dilivery to initiator. Initiator maintains ExpectedSTATSN. Any differennce between ExpectedSTATSN and STATSN means that there is a missing command from target to initiator. 
+##### Finally, for long running command (example large IO) - Initiator maintains an unique tag called (ITT or Initiator task tag) which remains same for long running IO.
+
 #### Initiator
 These are clients wich initiates the request. This first might have to go through authentation is it is setup.
 #### Target
