@@ -1,4 +1,30 @@
 # LKBL
+
+## Journaling
+
+System crash can leave FS in inconsistent state. This can be repaired using FS checkers, however they are slow. Modern FS prefer journaling also known as “Write-ahead” logging. It is a technique when before actual writing of data, operation is logged. This helps in case of crash where only the journal log is replayed instead of whole disk scan. Journal can be a file within FS or different device.  Journal normally contains a “Transaction” start, followed by what needs to be updated, finally it has an end marker called “transaction” end. These set of information have enough information to replay in case of crash. A Journaled FS, first writes the journaled log (also only called log) and once this is successful it “checkpoints” or updates the metadata with the latest information.
+
+Every write can be divide into two operations. 1) First, write to metadata, 2) Second, The Data itself. (block write)
+
+#### There are two types of journal setup:-
+1.	Data journaling - Where both metadata and data are journaled. Downside, is that data is written twice.
+2.	Metadata journaling (ordered) - Where only metadata is journaled. In this case data is first wirtten followed by Metadata.
+
+#### Cases where FS can in inconsistent state
+### Metadata Failed and Data failed
+-	FS is consistent. All failure.
+
+### Metadata failed but Data passed.
+-	Here there will no updated inode pointing to data.
+-	from FS point of view it is still consistent 
+
+### Metadata passed but Data failed
+-	Inode points to latest updated data. Which is not there but garbage 
+-	FS is in in-consistent state. 
+
+Write barrieres gurantees that the write before the issue of barrier would be executed first and would not be reorderd due to buffereing or cacheing.
+Journaling
+
 ## Linux Kernel Block Layer
 
 1. blk_queue_flag_set
